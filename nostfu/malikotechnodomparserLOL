@@ -1,0 +1,43 @@
+import requests
+from bs4 import BeautifulSoup
+import json
+
+url = 'https://www.technodom.kz/catalog/noutbuki-i-komp-jutery/noutbuki-i-aksessuary/noutbuki?page=1'
+
+response = requests.get(url)
+
+if response.status_code == 200:
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    new_prices = soup.find_all(class_='Typography ProductCardPrices_price__oCsLy Typography__Subtitle')
+    old_prices = soup.find_all(class_='Typography ProductCardPrices_oldPrice__wokOV Typography__Caption Typography__Caption_Strikethrough')
+    names = soup.find_all(class_='Typography ProductCardV_title__U38HX ProductCardV_loading___io2a Typography__M')
+
+    laptops = []
+    for i in range(len(names)):
+        name = names[i].text.strip()
+        new_price = new_prices[i].text.strip().replace('₸', '').replace('\xa0', '').replace(' ', '') if i < len(new_prices) else None
+        old_price = old_prices[i].text.strip().replace('₸', '').replace('\xa0', '').replace(' ', '') if i < len(old_prices) else None
+
+        laptops.append({
+            'name': name,
+            'new_price': int(new_price) if new_price else None,
+            'old_price': int(old_price) if old_price else None
+        })
+
+    laptops_sorted = sorted(laptops, key=lambda x: (x['new_price'] is None, x['new_price']))
+
+    for laptop in laptops_sorted:
+        print(f"name: {laptop['name']}")
+        print(f"new price: {laptop['new_price']} ₸")
+        print(f"old price: {laptop['old_price']} ₸" if laptop['old_price'] else "old price: no")
+        print('-' * 40)
+
+else:
+    print(f"elol: {response.status_code}")
+
+with open('all_categories.json', 'w', encoding='utf-8') as file:
+    json.dump(laptops, file, indent=4, ensure_ascii=False)
+
+
+
