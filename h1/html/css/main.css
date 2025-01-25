@@ -1,0 +1,77 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: black;  
+    font-size: 20px;
+    transform: scale(0.75); /* Масштабирование сайта до 75% */
+    transform-origin: top left; /* Точка масштабирования */
+    width: 133.33%; /* Компенсация уменьшения масштаба */
+    background: 1080px;
+}
+ul, li {
+    display: block;
+    padding: 0%;
+    margin: 0%;
+}
+
+.header {
+    background: url('../img/header-bg.jpg') no-repeat center top / cover;
+    letter-spacing: -0.25px;
+    margin: 0;
+}
+header a {
+    color: black;
+}
+.menu {
+    display: flex;
+}
+
+.menu li {
+    margin-right: 63px;
+    padding: 0;
+
+}
+
+.menu li a {
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.nav {
+    display: flex;
+    padding-left: 700px;
+    padding-right: 1211px;
+    padding-top: 88px;
+}
+.offer {
+    padding-left: 190px;
+    padding-top: 150.79px;
+}
+
+.zglo {
+    font-size: 64px;
+}
+
+.zgl {
+    margin-top: 10px;
+}
+
+.btn {
+    display: block;
+    font-size: 20px;
+    text-align: center;
+    padding: 38px 63px 37px 72px;
+    border: 1px solid #FF9000;
+    width: 207px;
+    height: 18  px;
+    border-radius: 7px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: black;
+    color: white
+}
+
